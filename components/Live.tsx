@@ -89,6 +89,7 @@ function Live() {
       {cursor && (
         <CursorChat
           cursor={cursor}
+          //@ts-ignore
           cursorState={cursorState}
           setCursorState={setCursorState}
           updateMyPresence={updateMyPresence}
