@@ -28,7 +28,7 @@ export type CursorState =
 
 export type Reaction = {
   value: string;
-  timestamp: number;
+  timestamp: number ;
   point: { x: number; y: number };
 };
 
