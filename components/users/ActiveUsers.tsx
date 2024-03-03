@@ -1,32 +1,38 @@
 import { useOthers, useSelf } from "@/liveblocks.config";
 import { Avatar } from "./Avatar";
+import { generateRandomName } from "@/lib/utils";
+import styles from "./index.module.css";
+import { useMemo } from "react";
 
-import styles from './index.module.css'
+const ActiveUser = () => {
+  const users = useOthers();
+  const currentUser = useSelf();
+  const hasMoreUsers = users.length > 3;
+    const memoizedUsers = useMemo(() => {
+      return <main className="flex items-center justify-center gap-2 ">
+      <div className="flex py-2">
+        {currentUser && (
+          <Avatar name="Me" otherStyles="border-[3px] border-primary-green" />
+        )}
 
-const ActiveUser =()=> {
-    const users = useOthers();
-    const currentUser = useSelf();
-    const hasMoreUsers = users.length > 3;
-  
-    return (
-      <main className="flex h-screen w-full select-none place-content-center place-items-center">
-        <div className="flex pl-3">
-          {users.slice(0, 3).map(({ connectionId, info }) => {
-            return (
-              <Avatar key={connectionId} src={info.avatar} name={info.name} />
-            );
-          })}
-  
-          {hasMoreUsers && <div className={styles.more}>+{users.length - 3}</div>}
-  
-          {currentUser && (
-            <div className="relative ml-8 first:ml-0">
-              <Avatar src={currentUser.info.avatar} name="You" />
-            </div>
-          )}
-        </div>
-      </main>
-    );
-}
-  
+        {users.slice(0, 3).map(({ connectionId, info }) => {
+          return (
+            <Avatar
+              key={connectionId}
+              name={generateRandomName()}
+              otherStyles="ml-3"
+            />
+          );
+        })}
+
+        {hasMoreUsers && <div className={styles.more}>+{users.length - 3}</div>}
+      </div>
+    </main>
+  }, [users.length])
+
+  return (
+    memoizedUsers
+  );
+};
+
 export default ActiveUser;

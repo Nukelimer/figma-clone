@@ -40,7 +40,12 @@ function CursorChat({
       {cursorState.mode === CursorMode.Chat && (
         <>
           <CursorSVG color="#000" />
-          <div className="absolute left-2 top-5 bg-blue-400 px-4 text-sm leading-relaxed text-white rounded-md">
+          <div className="absolute left-2 top-5 bg-blue-400 px-4 text-sm leading-relaxed text-white rounded-md"
+          
+            onKeyUp={(e) => {
+            e.stopPropagation()
+          }}
+          >
             {cursorState.previousMessage && (
               <div>{cursorState.previousMessage}</div>
             )}
@@ -51,7 +56,7 @@ function CursorChat({
               onChange={changeHandler}
               onKeyDown={keyDownHandler}
               placeholder={
-                cursorState.previousMessage ? "" : "type your message"
+                cursorState.previousMessage ? "" : "type your message..."
               }
               value={cursorState.message}
               maxLength={100}

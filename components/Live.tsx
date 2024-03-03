@@ -10,11 +10,16 @@ import LiveCursors from "./cursor/LiveCursors";
 import { useCallback, useEffect, useState } from "react";
 import { CursorMode, CursorState, Reaction, ReactionEvent } from "@/types/type";
 import CursorChat from "./cursor/CursorChat";
-import ReactionSelector from "./reaction/ReactionBtn";
+import ReactionSelector from "./reaction/ReactionButton";
 import FlyingReaction from "./reaction/FlyingReaction";
 import useInterval from "@/hooks/useInterval";
+import { type } from "os";
 
-function Live() {
+type Props = {
+  canvasRef: React.MutableRefObject<HTMLCanvasElement | null> 
+}
+
+function Live({canvasRef}: Props) {
   const others = useOthers();
   const [{ cursor }, updateMyPresence] = useMyPresence() as any;
   const [cursorState, setCursorState] = useState<CursorState>({
@@ -156,15 +161,15 @@ function Live() {
   }, []);
   return (
     <div
+      id="canvas"
       className="w-full h-[100vh] flex justify-center text-center items-center"
       onPointerDown={pointerDownHandler}
       onPointerLeave={pointerLeaveHandler}
       onPointerMove={pointerMoveHandler}
       onPointerUp={pointerUpHandler}>
-      <h1 className="text-4xl font-semibold">
-        Whereas disregard and contempt for human rights have resulted
-      </h1>
+      
 
+     <canvas ref={canvasRef}/>
       {reactions.map(({ point, timestamp, value }) => {
     
 
