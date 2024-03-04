@@ -2,7 +2,6 @@
 
 import { useCallback, useRef } from "react";
 import { ThreadData } from "@liveblocks/client";
-
 import {
   ThreadMetadata,
   useEditThreadMetadata,
@@ -10,19 +9,14 @@ import {
   useUser,
 } from "@/liveblocks.config";
 import { useMaxZIndex } from "@/lib/useMaxZIndex";
-
 import { PinnedThread } from "./PinnedThread";
-
 type OverlayThreadProps = {
   thread: ThreadData<ThreadMetadata>;
   maxZIndex: number;
 };
-
 export const CommentsOverlay = () => {
   const { threads } = useThreads();
-
   const maxZIndex = useMaxZIndex();
-
   return (
     <div>
       {threads
@@ -37,27 +31,17 @@ export const CommentsOverlay = () => {
     </div>
   );
 };
-
 const OverlayThread = ({ thread, maxZIndex }: OverlayThreadProps) => {
   const editThreadMetadata = useEditThreadMetadata();
 
-  /**
-   * We're using the useUser hook to get the user of the thread.
-   *
-   * useUser: https://liveblocks.io/docs/api-reference/liveblocks-react#useUser
-   */
-  const { isLoading } = useUser(thread.comments[0].userId);
+  // const { isLoading } = useUser(thread.comments[0].userId);
 
-  // We're using a ref to get the thread element to position it
   const threadRef = useRef<HTMLDivElement>(null);
 
-  // If other thread(s) above, increase z-index on last element updated
   const handleIncreaseZIndex = useCallback(() => {
     if (maxZIndex === thread.metadata.zIndex) {
       return;
     }
-
-    // Update the z-index of the thread in the room
     editThreadMetadata({
       threadId: thread.id,
       metadata: {
@@ -66,10 +50,9 @@ const OverlayThread = ({ thread, maxZIndex }: OverlayThreadProps) => {
     });
   }, [thread, editThreadMetadata, maxZIndex]);
 
-  if (isLoading) {
-    return null;
-  }
-
+  // if (isLoading) {
+  //   return null;
+  // }
   return (
     <div
       ref={threadRef}
@@ -78,6 +61,7 @@ const OverlayThread = ({ thread, maxZIndex }: OverlayThreadProps) => {
       style={{
         transform: `translate(${thread.metadata.x}px, ${thread.metadata.y}px)`,
       }}>
+
       <PinnedThread thread={thread} onFocus={handleIncreaseZIndex} />
     </div>
   );
