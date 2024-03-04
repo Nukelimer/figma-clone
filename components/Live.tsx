@@ -7,7 +7,7 @@ import {
   useOthers,
  
 } from "@/liveblocks.config";
-import LiveCursors from "./cursor/LiveCursors";
+import LiveCursors from "./cursor/LiveCursor";
 import { useCallback, useEffect, useState } from "react";
 import { CursorMode, CursorState, Reaction } from "@/types/type";
 
