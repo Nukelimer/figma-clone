@@ -2,10 +2,11 @@
 
 import { ReactNode } from "react";
 
-import { ClientSideSuspense } from "@liveblocks/react";
+
 import { RoomProvider } from "../liveblocks.config";
 import { LiveMap } from "@liveblocks/client";
 import Loader from "@/components/Loader";
+import { ClientSideSuspense } from "@liveblocks/react";
 
 export function Room({ children }: { children: ReactNode }) {
   return (
@@ -20,6 +21,8 @@ export function Room({ children }: { children: ReactNode }) {
     
     
     >
+
+    
       <ClientSideSuspense fallback={<Loader/>}>
         {() => children}
       </ClientSideSuspense>

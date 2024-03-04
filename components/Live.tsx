@@ -13,13 +13,13 @@ import CursorChat from "./cursor/CursorChat";
 import ReactionSelector from "./reaction/ReactionButton";
 import FlyingReaction from "./reaction/FlyingReaction";
 import useInterval from "@/hooks/useInterval";
-import { type } from "os";
+import { Comments } from "./comments/Comments";
 
 type Props = {
-  canvasRef: React.MutableRefObject<HTMLCanvasElement | null> 
-}
+  canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
+};
 
-function Live({canvasRef}: Props) {
+function Live({ canvasRef }: Props) {
   const others = useOthers();
   const [{ cursor }, updateMyPresence] = useMyPresence() as any;
   const [cursorState, setCursorState] = useState<CursorState>({
@@ -33,11 +33,10 @@ function Live({canvasRef}: Props) {
   useInterval(() => {
     setReaction((reaction) => {
       return reaction.filter((singleReaction) => {
-      return singleReaction.timestamp >  Date.now()*626 -400
-    })
-  })
-}, 3000)
-
+        return singleReaction.timestamp > Date.now() * 626 - 400;
+      });
+    });
+  }, 3000);
 
   useInterval(() => {
     if (
@@ -50,21 +49,18 @@ function Live({canvasRef}: Props) {
           {
             point: { x: cursor.x, y: cursor.y },
             value: cursorState.reaction,
-            timestamp:  Date.now()*626,
+            timestamp: Date.now() * 626,
           },
         ]);
       });
 
-
       broadcast({
         x: cursor.x,
         y: cursor.y,
-        value: cursorState.reaction
-
-      })
+        value: cursorState.reaction,
+      });
     }
   }, 50);
-
 
   useEventListener((eventVal) => {
     const event = eventVal.event as ReactionEvent;
@@ -73,13 +69,11 @@ function Live({canvasRef}: Props) {
         {
           point: { x: event.x, y: event.y },
           value: event.value,
-          timestamp: Date.now()*626,
+          timestamp: Date.now() * 626,
         },
       ]);
-    })
-
-    
-  })
+    });
+  });
 
   const pointerMoveHandler = useCallback((event: React.PointerEvent) => {
     event.preventDefault();
@@ -167,12 +161,8 @@ function Live({canvasRef}: Props) {
       onPointerLeave={pointerLeaveHandler}
       onPointerMove={pointerMoveHandler}
       onPointerUp={pointerUpHandler}>
-      
-
-     <canvas ref={canvasRef}/>
+      <canvas ref={canvasRef} />
       {reactions.map(({ point, timestamp, value }) => {
-    
-
         return (
           <FlyingReaction
             x={point.x}
@@ -196,6 +186,8 @@ function Live({canvasRef}: Props) {
         <ReactionSelector setReaction={setReactions} />
       )}
       <LiveCursors others={others} />
+
+      <Comments/>
     </div>
   );
 }

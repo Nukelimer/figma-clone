@@ -1,11 +1,12 @@
 "use client";
 
 import { ClientSideSuspense } from "@liveblocks/react";
+import { CollaborativeApp } from "./CommentsOverlay";
 
-import { CommentsOverlay } from "@/components/comments/CommentsOverlay";
+
 
 export const Comments = () => (
   <ClientSideSuspense fallback={null}>
-    {() => <CommentsOverlay />}
+    {() => <CollaborativeApp/>}
   </ClientSideSuspense>
 );
