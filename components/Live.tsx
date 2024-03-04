@@ -10,7 +10,7 @@ import {
 import LiveCursors from "./cursor/LiveCursors";
 import { useCallback, useEffect, useState } from "react";
 import { CursorMode, CursorState, Reaction } from "@/types/type";
-import CursorChat from "./cursor/CursorChat";
+
 import ReactionSelector from "./reaction/ReactionButton";
 import FlyingReaction from "./reaction/FlyingReaction";
 import useInterval from "@/hooks/useInterval";
@@ -22,6 +22,7 @@ import {
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
 import { shortcuts } from "@/constants";
+import CursorChat from "./cursor/CursorChat";
 
 type Props = {
   canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;
@@ -221,6 +222,8 @@ function Live({ canvasRef, redo, undo }: Props) {
             setCursorState={setCursorState}
             updateMyPresence={updateMyPresence}
           />
+
+        
         )}
         {cursorState.mode === CursorMode.ReactionSelector && (
           <ReactionSelector setReaction={setReactions} />

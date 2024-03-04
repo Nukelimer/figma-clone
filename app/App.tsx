@@ -1,7 +1,6 @@
 "use client";
 
 import Live from "@/components/Live";
-import NavBar from "@/components/Navbar";
 import RightSideBar from "@/components/RightSideBar";
 import { useEffect, useRef, useState } from "react";
 import { fabric } from "fabric";
@@ -23,8 +22,11 @@ import LeftSidebar from "@/components/LeftSidebar";
 import { defaultNavElement } from "@/constants";
 import { handleDelete, handleKeyDown } from "@/lib/key-events";
 import { handleImageUpload } from "@/lib/shapes";
+import NavBar from "@/components/NavBar";
+
 
 export default function Page() {
+
   const undo = useUndo();
   const redo = useRedo();
   const canvasRef = useRef<HTMLCanvasElement>(null);
