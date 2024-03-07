@@ -7,7 +7,7 @@ import {
   useOthers,
  
 } from "@/liveblocks.config";
-import LiveCursors from "./cursor/LiveCursor";
+import LiveCursors from "./Cursor/LiveCursor";
 import { useCallback, useEffect, useState } from "react";
 import { CursorMode, CursorState, Reaction } from "@/types/type";
 
@@ -22,7 +22,7 @@ import {
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
 import { shortcuts } from "@/constants";
-import CursorChat from "./cursor/CursorChat";
+import CursorChat from "./Cursor/CursorChat";
 
 type Props = {
   canvasRef: React.MutableRefObject<HTMLCanvasElement | null>;

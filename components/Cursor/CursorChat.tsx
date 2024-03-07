@@ -2,6 +2,7 @@ import CursorSVG from "@/public/assets/CursorSVG";
 import { CursorChatProps, CursorMode } from "@/types/type";
 
 function CursorChat({
+  
   cursor,
   cursorState,
   setCursorState,

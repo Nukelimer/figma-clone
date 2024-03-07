@@ -1,6 +1,7 @@
-import Cursor from "./Cursor";
+
 import { COLORS } from "@/constants";
 import { LiveCursorProps } from "@/types/type";
+import Cursor from "./Cursor";
 
 const LiveCursor = ({ others }: LiveCursorProps) => {
   return others.map(({ connectionId, presence }) => {
